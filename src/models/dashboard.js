@@ -3,11 +3,11 @@ import { getEventTasks, getEventObjects } from '@/services/dashboard'
 
 export default () => {
     const [events, setEvents] = useState([])
-    const [oldEvents, setOldEvents] = useState([])
     const [newEvents, setNewEvents] = useState([])
     const [objects, setObjects] = useState([])
     const [loading, setLoading] = useState(true)
 
+    let oldEvents = []
     const getTasks = () => getEventTasks().then(res => {
         const filteredRes = res?.results?.map(result=>({
             id: result.id,
@@ -18,6 +18,8 @@ export default () => {
             sponsorId: result.sponsorObjects[0]?.id,
             deviceName: result.sponsorObjects[0]?.devices[0]?.name
         }))
+        setNewEvents(filteredRes.filter(x=> !oldEvents.map(o=>o.id).includes(x.id)))
+        oldEvents = filteredRes
         setEvents(filteredRes)
         setLoading(false)
     })

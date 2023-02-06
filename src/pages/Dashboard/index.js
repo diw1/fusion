@@ -1,9 +1,9 @@
 import { PageContainer } from '@ant-design/pro-components'
 import { useModel } from '@umijs/max'
-import styles from './index.less'
-import {Col, Row, Card} from 'antd'
+import {Col, Row, Card, Space, notification} from 'antd'
 import DeviceCard from '../../components/DeviceCard'
 import AutoRefreshComponent from '../../components/AutoRefreshComponent'
+import moment from 'moment'
 
 const mergeEvent = (events,objects) => {
     return objects.map(object=>{
@@ -28,10 +28,18 @@ const mergeEvent = (events,objects) => {
 }
 
 const Dashboard = () => {
-    const {events, objects, getTasks} = useModel('dashboard')
-
+    const {events, objects, getTasks, newEvents} = useModel('dashboard')
     const combinedObjects = mergeEvent(events,objects)
-    console.log(events, objects, combinedObjects)
+    // console.log(events, newEvents, objects, combinedObjects)
+
+    newEvents.reverse().map(event=> notification.warning({
+        message: `${event.name} ${event.eventName}`,
+        description: <Space direction="vertical">
+            {event.startsAt}
+        </Space>,
+        duration:  moment(event.startsAt).isSame(moment(),'day') ? 0 : 0 // TODO Should we show old events?
+    }))
+
 
     const renderCards = (objects) => {
         return <Row gutter={[20,20]}>

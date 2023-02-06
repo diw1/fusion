@@ -3,15 +3,11 @@ import './index.less'
 import PropTypes from 'prop-types'
 import Fall from '../../assets/images/fall_down.svg'
 import {patchEventTask} from '../../services/dashboard'
-import {useRequest} from 'umi'
 
 const DeviceCard = (props) => {
     const {device, getTasks} = props
-    const [api, contextHolder] = notification.useNotification()
     const successNotification = (title) => {
-        api['success']({
-            message: title,
-        })
+        notification.success({message: title,})
     }
 
     const resolveFall = () => {
@@ -31,7 +27,6 @@ const DeviceCard = (props) => {
             title={device.name}
             className='DeviceCard'
         >
-            {contextHolder}
             <Row>
                 <Col span={12} style={{textAlign: 'center'}} className={device.fall ? 'fall':''}>
                     <Typography.Title level={5}>
