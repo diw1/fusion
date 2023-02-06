@@ -1,0 +1,120 @@
+.DeviceCard {
+    .ant-card-head-title{
+        font-size: 36px;
+    }
+
+    width: 100%;
+
+    .ant-card-body{
+        border: 1px solid gray;
+        padding: 0;
+        height:100%;
+    }
+
+    .ant-col {
+        min-height: 171px;
+        border: 1px solid gray;
+    }
+
+    .anticon{
+        font-size: 60px;
+    }
+
+    .resolveButton{
+
+    }
+
+    .fall{
+        color: white;
+        background: #FFA500;
+    }
+
+    .offline{
+        color: white;
+        background: #E03B50;
+    }
+
+    .ant-typography{
+        color: inherit;
+    }
+
+    .ant-row-bottom{
+        height:100%;
+    }
+
+    .deviceIconCol{
+        height: auto;
+        width: 50px;
+    }
+
+    .deviceNameCol{
+        max-width: calc(100% - 54px);
+        flex: 1;
+        height: 100%;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .deviceTitle{
+        overflow: hidden;
+        font-size: 18px;
+        font-weight: 600;
+        white-space: pre;
+        text-overflow: ellipsis;
+    }
+
+    .deviceDesc{
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .hubName {
+        position: absolute;
+        bottom: 0;
+        max-width: 100%;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 600;
+
+        .deviceDisplayName{
+            vertical-align: bottom;
+            max-width: inherit;
+            overflow: hidden;
+            white-space: pre;
+            text-overflow:ellipsis;
+            display:inline-block;
+        }
+    }
+
+    .hub {
+        width: 40px;
+        height: 90px;
+    }
+
+    .beacon {
+        width: 40px;
+        height: 45px;
+    }
+
+    .radar {
+        width: 40px;
+        height: auto;
+        padding-bottom: 8px;
+    }
+}
+
+.zeroPerson{
+    opacity: 0.5;
+}
+
+.zeroPersonDelete{
+    opacity: 1;
+    content:"";
+    position:absolute;
+    left:4px;
+    top:8px;
+    width:50%;
+    box-sizing:border-box;
+    border-bottom:2px solid white;
+    transform-origin:bottom center;
+    transform:rotate(315deg);
+}
