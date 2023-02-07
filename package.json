@@ -1,8 +1,9 @@
 {
-  "private": true,
+  "private": false,
   "author": "Kevin Wang <kevin@sofihub.com>",
   "scripts": {
     "build": "max build",
+    "deploy": "gh-pages -d dist",
     "dev": "max dev",
     "format": "prettier --cache --write .",
     "postinstall": "max setup",
@@ -15,11 +16,13 @@
     "@ant-design/pro-components": "^2.0.1",
     "@umijs/max": "^4.0.48",
     "antd": "^5.1.7",
-    "path-to-regexp": "^6.2.1"
+    "path-to-regexp": "^6.2.1",
+    "umi-plugin-gh-pages": "^1.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "gh-pages": "^5.0.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
