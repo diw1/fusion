@@ -11,7 +11,6 @@ const DeviceCard = (props) => {
 
   return (
     <Card
-      bordered={false}
       title={device.name}
       className="device-card"
       extra={
@@ -23,10 +22,7 @@ const DeviceCard = (props) => {
       }
     >
       <Row>
-        <Col
-          span={12}
-          className={`${device.fall ? 'offline blink' : ''} bordered`}
-        >
+        <Col span={12} className={`${device.fall ? 'offline blink' : ''} `}>
           <Typography.Title level={4} style={{ marginTop: '8px' }}>
             Fall Detection
           </Typography.Title>
@@ -37,25 +33,24 @@ const DeviceCard = (props) => {
             {device.fall && <Col className="time">{device.fallTime}</Col>}
           </Row>
         </Col>
-        <Col span={12} className="bordered">
-          <Typography.Title
-            level={4}
-            style={{ textAlign: 'center', marginTop: '8px' }}
-          >
+        <Col span={12}>
+          <Typography.Title level={4} style={{ marginTop: '8px' }}>
             Entry/Exit
           </Typography.Title>
           <Row wrap={false}>
             <Col>
-              <img src={Entry} width={70} alt="entry" />
+              <img
+                src={Entry}
+                width={90}
+                alt="entry"
+                style={{ margin: '-10px 0 0 -10px' }}
+              />
             </Col>
           </Row>
         </Col>
         {device.name.includes('Bed') && (
-          <Col span={12} className="bordered">
-            <Typography.Title
-              level={4}
-              style={{ textAlign: 'center', marginTop: '8px' }}
-            >
+          <Col span={12}>
+            <Typography.Title level={4} style={{ marginTop: '8px' }}>
               Breathing
             </Typography.Title>
             <Row wrap={false}>
@@ -66,14 +61,8 @@ const DeviceCard = (props) => {
           </Col>
         )}
         {device.name.includes('Bath') && (
-          <Col
-            span={12}
-            className={`${device.timeout ? 'offline' : ''} bordered`}
-          >
-            <Typography.Title
-              level={4}
-              style={{ textAlign: 'center', marginTop: '8px' }}
-            >
+          <Col span={12} className={`${device.timeout ? 'offline' : ''} `}>
+            <Typography.Title level={4} style={{ marginTop: '8px' }}>
               Overtime
             </Typography.Title>
             <Row wrap={false}>

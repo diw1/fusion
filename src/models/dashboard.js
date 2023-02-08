@@ -27,6 +27,7 @@ export default () => {
   const getTasks = () =>
     getEventTasks().then((res) => {
       const filteredRes = res?.results
+        ?.filter((res) => !res.eventCode.includes('LossSignal'))
         ?.map((result) => {
           moment(result.startsAt).isBefore(moment().subtract(5, 'minute')) &&
             resolveFall(result);
