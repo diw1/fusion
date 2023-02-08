@@ -1,83 +1,97 @@
-import {Button, Card, Col, Row, Typography, notification} from 'antd'
-import './index.less'
-import PropTypes from 'prop-types'
-import Fall from '../../assets/images/fall_down.svg'
-import {patchEventTask} from '../../services/dashboard'
+import { Card, Col, Row, Typography, Badge } from 'antd';
+import './index.less';
+import PropTypes from 'prop-types';
+import Fall from '../../assets/images/fall_down.svg';
+import Entry from '../../assets/images/entry_exit.png';
+import Overtime from '../../assets/images/overtime.png';
+import Breathing from '../../assets/images/breathing.png';
 
 const DeviceCard = (props) => {
-    const {device, getTasks} = props
-    const successNotification = (title) => {
-        notification.success({message: title,})
-    }
+  const { device } = props;
 
-    const resolveFall = () => {
-        const payload = [{
-            id: device.fallId,
-            action: 30,
-            description: 'resolve'
-        }]
-        patchEventTask(payload).then(()=> {
-            getTasks()
-            successNotification('Fall resolved')
-        }
+  return (
+    <Card
+      bordered={false}
+      title={device.name}
+      className="device-card"
+      extra={
+        device.name === 'Bed02' ? (
+          <Badge status="success" text="ONLINE" />
+        ) : (
+          <Badge status="error" text="OFFLINE" />
         )
-    }
-    return (
-        <Card
-            title={device.name}
-            className='DeviceCard'
+      }
+    >
+      <Row>
+        <Col
+          span={12}
+          className={`${device.fall ? 'offline blink' : ''} bordered`}
         >
-            <Row>
-                <Col span={12} style={{textAlign: 'center'}} className={device.fall ? 'fall':''}>
-                    <Typography.Title level={5}>
-                            Fall Detect
-                    </Typography.Title>
-                    <div>
-                        <img src={Fall} width={70} alt="fall"/>
-                    </div>
-                    {device.fall && <>
-                        <div>
-                        Time: {device.fallTime}
-                        </div>
-                        <div style={{textAlign: 'end'}}>
-                            <Button className='resolveButton' type="primary" size="small" onClick={resolveFall}>Resolve</Button>
-                        </div>
-                    </>}
-
-                </Col>
-                <Col span={12} style={{textAlign: 'center'}}>
-                    <Typography.Title level={5}>
-                            Entry/Exit Time
-                    </Typography.Title>
-                </Col>
-                {/*<Col span={12} style={{textAlign: 'center'}} className={device.offline ? 'offline':''}>*/}
-                {/*    <Typography.Title level={5}>*/}
-                {/*            Breathing*/}
-                {/*    </Typography.Title>*/}
-                {/*    {device.offline && <>*/}
-                {/*        <div>*/}
-                {/*            Time: {device.offlineTime}*/}
-                {/*        </div>*/}
-                {/*    </>}*/}
-                {/*</Col>*/}
-                <Col span={12} style={{textAlign: 'center'}} className={device.timeout ? 'fall':''}>
-                    <Typography.Title level={5}>
-                            Overtime
-                    </Typography.Title>
-                    {device.timeout && <>
-                        <div>
-                            Time: {device.timeoutTime}
-                        </div>
-                    </>}
-                </Col>
+          <Typography.Title level={4} style={{ marginTop: '8px' }}>
+            Fall Detection
+          </Typography.Title>
+          <Row wrap={false}>
+            <Col>
+              <img src={Fall} width={70} alt="fall" />
+            </Col>
+            {device.fall && <Col className="time">{device.fallTime}</Col>}
+          </Row>
+        </Col>
+        <Col span={12} className="bordered">
+          <Typography.Title
+            level={4}
+            style={{ textAlign: 'center', marginTop: '8px' }}
+          >
+            Entry/Exit
+          </Typography.Title>
+          <Row wrap={false}>
+            <Col>
+              <img src={Entry} width={70} alt="entry" />
+            </Col>
+          </Row>
+        </Col>
+        {device.name.includes('Bed') && (
+          <Col span={12} className="bordered">
+            <Typography.Title
+              level={4}
+              style={{ textAlign: 'center', marginTop: '8px' }}
+            >
+              Breathing
+            </Typography.Title>
+            <Row wrap={false}>
+              <Col>
+                <img src={Breathing} width={70} alt="breathing" />
+              </Col>
             </Row>
-        </Card>
-    )
-}
+          </Col>
+        )}
+        {device.name.includes('Bath') && (
+          <Col
+            span={12}
+            className={`${device.timeout ? 'offline' : ''} bordered`}
+          >
+            <Typography.Title
+              level={4}
+              style={{ textAlign: 'center', marginTop: '8px' }}
+            >
+              Overtime
+            </Typography.Title>
+            <Row wrap={false}>
+              <Col>
+                <img src={Overtime} width={70} alt="fall" />
+              </Col>
+              {device.timeout && <Col>{device.timeoutTime}</Col>}
+            </Row>
+          </Col>
+        )}
+      </Row>
+    </Card>
+  );
+};
 
 DeviceCard.propTypes = {
-    device: PropTypes.object,
-    getTasks: PropTypes.func,
-}
+  device: PropTypes.object,
+  getTasks: PropTypes.func,
+};
 
-export default DeviceCard
+export default DeviceCard;

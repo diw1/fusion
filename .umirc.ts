@@ -2,7 +2,9 @@ import { defineConfig } from '@umijs/max';
 
 // @ts-ignore
 export default defineConfig({
-  antd: {},
+  antd: {
+    dark: true,
+  },
   access: {},
   dva: {},
   model: {},
@@ -29,9 +31,10 @@ export default defineConfig({
       name: 'Dashboard',
       path: '/dashboard',
       component: './Dashboard',
+      layout: false,
     },
   ],
   npmClient: 'yarn',
-  base: '/fusion/',
-  publicPath: '/fusion/',
+  // base: '/fusion/',
+  // publicPath: '/fusion/',
 });

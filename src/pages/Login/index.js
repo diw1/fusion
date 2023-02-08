@@ -6,7 +6,7 @@ import Logo from '@/assets/images/logo.svg';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Component } from 'react';
 
-@connect(({ global, loading }) => ({
+@connect(({ loading }) => ({
   loading: loading.models.list,
 }))
 export default class Login extends Component {
