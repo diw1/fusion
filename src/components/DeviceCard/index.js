@@ -11,8 +11,10 @@ const DeviceCard = (props) => {
 
   return (
     <Card
+      headStyle={{ border: 'none' }}
       title={device.name}
       className="device-card"
+      bordered={false}
       extra={
         device.name === 'Bed02' ? (
           <Badge status="success" text="ONLINE" />
