@@ -16,7 +16,7 @@ const DeviceCard = (props) => {
       className="device-card"
       bordered={false}
       extra={
-        device.name === 'Bed02' ? (
+        device.name === 'Bed01' || device.name === 'Bed02' ? (
           <Badge status="success" text="ONLINE" />
         ) : (
           <Badge status="error" text="OFFLINE" />
